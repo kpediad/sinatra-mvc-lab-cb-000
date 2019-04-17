@@ -1,10 +1,11 @@
 class PigLatinizer
-  def initialize(text)
-    @normal_text = text.downcase
+  def initialize()
   end
 
-  def piglatinize
-    starting_char = @normal_text.slice!(0)
-    @normal_text = @normal_text + starting_char + 'ay'
+  def piglatinize(text)
+    text.split(" ").collect do |word| 
+      parts = word.partition(/[aeiou]/i)
+      parts[0] == "" ? parts[1] + parts[2] + 'way' : parts[1] + parts[2] + parts[0] + 'ay'
+    end.join(" ")
   end
 end
